@@ -1,0 +1,19 @@
+{
+  "name": "todo-user",
+  "version": "1.0.0",
+  "description": "user todo app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunalmandot/todo-user.git"
+  },
+  "author": "Kunal Jain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kunalmandot/todo-user/issues"
+  },
+  "homepage": "https://github.com/kunalmandot/todo-user#readme"
+}
