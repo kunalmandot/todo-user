@@ -6,6 +6,10 @@ const router = express.Router();
 
 const validateTodo = id => todos.find(todo => todo.id === parseInt(id));
 
+const throwResourceNotFoundError = (res, id) => res.status(404).json({'msg': `The TODO item with id ${id} was not found.`});
+
+const throwUnauthorizedError = res => res.status(401).json({'msg': 'You are not authorized to access.'});
+
 // get todo item list
 router.get('/', authenticateToken, (req, res) => {
     const result = todos.filter(function(todo) {
@@ -38,10 +42,10 @@ router.post('/', authenticateToken,(req, res) => {
 router.get('/:id', authenticateToken, (req, res) => {
     const todo = validateTodo(req.params.id);
     if (!todo) {
-        return res.status(404).json({'msg': `The TODO item with id ${req.params.id} was not found.`});
+        return throwResourceNotFoundError(res, req.params.id);
     }
     if (todo.userName !== req.user.userName) {
-        return res.status(401).json({'msg': 'You are not authorized to access.'});
+        return throwUnauthorizedError(res);
     }
     res.json(todo);
 });
@@ -54,10 +58,10 @@ router.put('/:id', authenticateToken, (req, res) => {
 
     let todo = validateTodo(req.params.id);
     if (!todo) {
-        return res.status(404).json({'msg': `The TODO item with id ${req.params.id} was not found.`});
+        return throwResourceNotFoundError(res, req.params.id);
     }
     if (todo.userName !== req.user.userName) {
-        return res.status(401).json({'msg': 'You are not authorized to access.'});
+        return throwUnauthorizedError(res);
     }
 
     const todoIndex = todos.indexOf(todo);
@@ -78,10 +82,10 @@ router.put('/:id', authenticateToken, (req, res) => {
 router.delete('/:id', authenticateToken, (req, res) => {
     let todo = validateTodo(req.params.id);
     if (!todo) {
-        return res.status(404).json({'msg': `The TODO item with id ${req.params.id} was not found.`});
+        return throwResourceNotFoundError(res, req.params.id);
     }
     if (todo.userName !== req.user.userName) {
-        return res.status(401).json({'msg': 'You are not authorized to access.'});
+        return throwUnauthorizedError(res);
     }
 
     const todoIndex = todos.indexOf(todo);
