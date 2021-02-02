@@ -1,22 +1,22 @@
 const users = [
     {
         id: 1,
-        username: 'kunal',
+        userName: 'kunal',
         password: 'kunal123'
     },
     {
         id: 2,
-        username: 'sunil',
+        userName: 'sunil',
         password: 'sunil123',
     },
     {
         id: 3,
-        username: 'mayank',
+        userName: 'mayank',
         password: 'mayank123'
     },
     {
         id: 4,
-        username: 'nil',
+        userName: 'nil',
         password: 'nil123'
     }
 ];
