@@ -1,44 +1,45 @@
 const todos = [
     {
         id: 1,
-        username: 'kunal',
+        userName: 'kunal',
         heading: 'Requirement Gathering',
         body: 'Understand requirements and do analysis'
-        // body: [
-        //     'Understand requirements',
-        //     'Do analysis'
-        // ]
+        // user may have multiple things to do in a single todo. 
+        /* body: [
+            'Understand requirements',
+            'Do analysis'
+        ]*/
     },
     {
         id: 2,
-        username: 'kunal',
+        userName: 'kunal',
         heading: 'Create User Model',
-        body: 'Create user table and define relationsip with other tables',
-        // body: [
-        //     'Create actual table',
-        //     'Define relationship with other table'
-        // ]
+        body: 'Create user table and define relationship with other tables',
+        /* body: [
+            'Create actual table',
+            'Define relationship with other table'
+        ]*/
     },
     {
         id: 3,
-        username: 'nil',
+        userName: 'nil',
         heading: 'Perform Authentication',
         body: 'Develop signup, login and logout functionality'
-        // body: [
-        //     'Develop signup feat',
-        //     'Develop login feat',
-        //     'Develop logout feat'
-        // ]
+        /* body: [
+            'Develop signup feat',
+            'Develop login feat',
+            'Develop logout feat'
+        ]*/
     },
     {
         id: 4,
-        username: 'sunil',
+        userName: 'sunil',
         heading: 'Perform Testing',
         body: 'Create and run test cases'
-        // body: [
-        //     'Create test cases',
-        //     'Run test cases'
-        // ]
+        /* body: [
+            'Create test cases',
+            'Run test cases'
+        ]*/
     }
 ];
 
