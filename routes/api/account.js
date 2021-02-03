@@ -15,13 +15,6 @@ const authenticateUser = (userName, password) => {
         }
     }
     return token;
-    // users.forEach(user => {
-    //     if(user.userName === userName && user.password === password) {
-    //         return generateAccessToken(userName); 
-           
-    //     }
-    // });
-    // return token;
 }
  
 router.post('/login', (req, res) => {
