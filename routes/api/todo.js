@@ -6,9 +6,9 @@ const router = express.Router();
 
 const validateTodo = id => todos.find(todo => todo.id === parseInt(id));
 
-const throwResourceNotFoundError = (res, id) => res.status(404).json({'msg': `The TODO item with id ${id} was not found.`});
+const throwResourceNotFoundError = (res, id) => res.status(404).json({msg: `The TODO item with id ${id} was not found.`});
 
-const throwUnauthorizedError = res => res.status(401).json({'msg': 'You are not authorized to access.'});
+const throwUnauthorizedError = res => res.status(401).json({msg: 'You are not authorized to access.'});
 
 // get todo item list
 router.get('/', authenticateToken, (req, res) => {
@@ -23,7 +23,7 @@ router.get('/', authenticateToken, (req, res) => {
 // create todo item 
 router.post('/', authenticateToken,(req, res) => {
     if(!req.body.heading || !req.body.body) {
-        return res.status(400).json({'msg': 'Heading and body both are required.'});
+        return res.status(400).json({msg: 'Heading and body both are required.'});
     }
 
     const todo = {
@@ -34,7 +34,7 @@ router.post('/', authenticateToken,(req, res) => {
     }
     todos.push(todo);
 
-    res.json({'msg': 'Created successfully.', todo});
+    res.json({msg: 'Created successfully.', todo});
 });
 
 
@@ -53,7 +53,7 @@ router.get('/:id', authenticateToken, (req, res) => {
 // update todo item
 router.put('/:id', authenticateToken, (req, res) => {
     if(!req.body.heading && !req.body.body) {
-        return res.status(400).json({'msg': 'Heading and body either both or anyone is required.'});
+        return res.status(400).json({msg: 'Heading and body either both or anyone is required.'});
     }
 
     let todo = validateTodo(req.params.id);
@@ -73,9 +73,7 @@ router.put('/:id', authenticateToken, (req, res) => {
         todos[todoIndex].body = req.body.body;
     }
 
-    todo = todos[todoIndex];
-
-    res.json({'msg': 'Updated successfully.', todo});
+    res.json({msg: 'Updated successfully.', todo: todos[todoIndex]});
 });
 
 // delete todo item
@@ -92,7 +90,7 @@ router.delete('/:id', authenticateToken, (req, res) => {
 
     todos.splice(todoIndex, 1);
 
-    res.json({'msg': 'Deleted successfully.', todo});
+    res.json({msg: 'Deleted successfully.', todo});
 });
 
 module.exports = router
