@@ -1,4 +1,5 @@
 const express = require('express');
+const { port,host } = require('./config');
 const todo = require('./routes/api/todo');
 const account = require('./routes/api/account');
 
@@ -14,7 +15,6 @@ app.use('/api/todos', todo);
 // api/account route
 app.use('/api/accounts', account);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);    
+app.listen(port, host, () => {
+    console.log(`Server started on ${host} : ${port}`);    
 });
