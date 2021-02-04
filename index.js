@@ -1,4 +1,7 @@
 const express = require('express');
+
+const mongoose = require('mongoose');
+
 const { port,host } = require('./config');
 const todo = require('./routes/api/todo');
 const account = require('./routes/api/account');
