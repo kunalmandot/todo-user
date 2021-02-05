@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const authenticateToken = require('../../middlewares/authenticate-token');
 const User = require('../models/user');
+const BlackListToken = require('../models/blackListToken');
 
 const router = express.Router();
 
@@ -78,7 +79,23 @@ router.put('/change-password', authenticateToken, async (req,res) => {
     }
 });
 
-router.post('/get-user-data', async (req, res) => {
+
+router.delete('/logout', authenticateToken, async (req,res) => {
+    try {
+        const blackListToken = new BlackListToken({
+            token: req.headers['authorization'].split(' ')[1]
+        });
+        const savedBlackListToken = await blackListToken.save();
+        if(savedBlackListToken){
+            res.json({msg: 'You logged out successfully.'});
+        }
+    } catch (err) {
+        res.status(500).json({msg: 'Something went wrong.'})
+    }
+});
+
+// For learning purpose
+/*router.post('/get-user-data', async (req, res) => {
     const {uid1, uid2} = req.body;
     if(!uid1 || !uid2) {
         return res.status(400).json({msg: 'uid1 and uid2 both are required.'});
@@ -91,6 +108,6 @@ router.post('/get-user-data', async (req, res) => {
     } catch(err) {
         return res.status(500).json({msg: 'Something went wrong.'});
     }
-});
+});*/
 
 module.exports = router;
