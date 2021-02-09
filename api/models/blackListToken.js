@@ -4,13 +4,13 @@ const BlackListTokenSchema = mongoose.Schema({
     token: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     createdAt: {
         type: Date,
         required: true,
-        default: Date.now
-    }
+        default: Date.now,
+    },
 });
 
 module.exports = mongoose.model('BlackListToken', BlackListTokenSchema);
