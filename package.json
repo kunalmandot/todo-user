@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index",
     "dev": "nodemon index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -26,9 +26,12 @@
     "mongoose": "^5.11.15"
   },
   "devDependencies": {
+    "chai": "^4.3.0",
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
+    "mocha": "^8.2.1",
+    "mock-express-response": "^0.3.0",
     "nodemon": "^2.0.7"
   }
 }
