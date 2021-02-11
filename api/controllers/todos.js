@@ -12,7 +12,7 @@ const getTodos = async (req, res) => {
     try {
         const todos = await Todo.find({ createdBy: req.user.userId });
         if (todos.length === 0) {
-            res.json({ msg: 'No todos found.' });
+            return res.json({ msg: 'No todos found.' });
         }
         return res.json(todos);
     } catch (err) {
@@ -81,11 +81,16 @@ const putTodo = async (req, res) => {
             return throwUnauthorizedError(res);
         }
         let updatedTodo;
-        if (title && body) {
-            // eslint-disable-next-line max-len
-            updatedTodo = await Todo.findByIdAndUpdate(id, { $set: { title, body } }, { new: true });
-        } else if (title) {
-            updatedTodo = await Todo.findByIdAndUpdate(id, { $set: { title } }, { new: true });
+        if (title) {
+            const titleExist = await Todo.findOne({ title });
+            if (titleExist) {
+                return res.status(400).json({ msg: 'Todo title already taken.' });
+            }
+            if (body) {
+                updatedTodo = await Todo.findByIdAndUpdate(id, { $set: { title, body } }, { new: true });
+            } else {
+                updatedTodo = await Todo.findByIdAndUpdate(id, { $set: { title } }, { new: true });
+            }
         } else {
             updatedTodo = await Todo.findByIdAndUpdate(id, { $set: { body } }, { new: true });
         }

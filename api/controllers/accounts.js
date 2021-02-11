@@ -18,7 +18,6 @@ const login = async (req, res) => {
         if (!userData) {
             return res.status(401).json({ msg: 'Credentials were not matched.' });
         }
-        // eslint-disable-next-line no-underscore-dangle
         const token = generateAccessToken(userData._id);
         return res.json({ msg: 'Logged in successfully.', token });
     } catch (err) {
@@ -41,7 +40,7 @@ const signup = async (req, res) => {
         });
         const savedUser = await user.save();
         if (savedUser) {
-            return res.json({ msg: 'Successfully Created', user: savedUser });
+            return res.json({ msg: 'Signed up successfully.', user: savedUser });
         }
         return throwServerError(res);
     } catch (err) {
@@ -68,7 +67,7 @@ const changePassword = async (req, res) => {
         // console.log(user);
         if (user) {
             if (user.password !== oldPassword) {
-                return res.status(400).json({ msg: 'Old password should be correct.' });
+                return res.status(401).json({ msg: 'Old password should be correct.' });
             }
             await User.updateOne({ _id: req.user.userId }, { $set: { password: newPassword } });
             return res.json({ msg: 'You changed password successfully.' });
@@ -111,6 +110,8 @@ const getUserData = async (req, res) => {
 };
 
 module.exports = {
+    throwServerError,
+    generateAccessToken,
     login,
     signup,
     changePassword,
